@@ -1,0 +1,16 @@
+.btnCadPaciente {
+    width: 200px;
+    height: 55px;
+    border-radius: 15px;
+    border: none;
+    position: absolute;
+    top: 3%;
+    left: 4%;
+    font-weight: 600;
+    font-size: 1.05em;
+    
+}
+.modalBackdrop{
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(1px);
+}

@@ -1,0 +1,12 @@
+.mainAtendimento {
+    height: 85%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.list {
+    background-color: red;
+    width: 200px;
+    height: 30px;
+}
