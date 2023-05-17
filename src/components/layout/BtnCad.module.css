@@ -1,0 +1,11 @@
+.btnCadPaciente{
+    width: 180px;
+    height: 45px;
+    border: none;
+    position: absolute;
+    top: 3%;
+    left: 4%;
+    font-weight: 600;
+    font-size: 0.9em;
+    border-radius: 15px;
+}

@@ -1,0 +1,50 @@
+/* Works on Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: blue orange;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+    /* background: orange; */
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgba(34, 34, 34, 0.75);
+    border-radius: 50px;
+    width: 5px;
+}
+.mainInicial {
+    height: 85%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.listPatients{
+    position: absolute;
+    bottom: 0;
+    height: 85%;
+    width: 100%;
+    overflow-y: scroll;
+}
+.uniquePatient {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0.5rem;
+}
+
+.uniquePatient img {
+    width: 20%;
+    height: 280px;
+    
+} 
+.uniquePatient p{
+    width: 20%;
+  
+}
