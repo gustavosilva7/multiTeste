@@ -1,16 +1,9 @@
-/* Works on Firefox */
 * {
     scrollbar-width: thin;
-    scrollbar-color: blue orange;
 }
 
-/* Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
     width: 5px;
-}
-
-*::-webkit-scrollbar-track {
-    /* background: orange; */
 }
 
 *::-webkit-scrollbar-thumb {
@@ -18,33 +11,66 @@
     border-radius: 50px;
     width: 5px;
 }
+
 .mainInicial {
-    height: 85%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-}
-.listPatients{
-    position: absolute;
-    bottom: 0;
-    height: 85%;
-    width: 100%;
-    overflow-y: scroll;
-}
-.uniquePatient {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 0.5rem;
+    height: 85vh;
+    width: 100vw;
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+    background: var(--colorBackground);
 }
 
-.uniquePatient img {
-    width: 20%;
-    height: 280px;
-    
-} 
-.uniquePatient p{
-    width: 20%;
-  
+.divBtnCadPaciente {
+    width: 100%;
+    grid-row: 1/2;
+    display: flex;
+    align-items: center;
+    padding: 2%;
+}
+
+.listPatients {
+    width: 100%;
+    grid-row: 2/3;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 1.5% 1%;
+    gap: 8px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.uniquePatient {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    gap: 10px;
+    border-radius: 10px;
+    background-color: #1baef7;
+    transition: all .5s;
+}
+.uniquePatient:hover{
+    transform: scale(1.035);
+}
+.uniquePatient:hover > span{
+    font-weight: 600;
+}
+.uniquePatient span {
+    width: 22%;
+    height: 40px;
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.uniquePatient a {
+    width: 5%;
+    height: 40px;
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
 }

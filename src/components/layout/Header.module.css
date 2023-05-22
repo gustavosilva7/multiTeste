@@ -1,25 +1,46 @@
-.header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 15%;
-    background-color: rgba(35, 35, 34, 0.85);
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+
+:root {
+    --colorBackground: #e3e1df;
+    --colorDetaque: #1baef7;
+    --colorFonte: #1f1d1d;
 }
 
-.header div {
-    width: 50%;
+.header {
+    height: 15vh;
+    width: 100vw;
     display: flex;
-    flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    padding: 0 3%;
+    padding: 2%;
+    background: var(--colorDetaque);
+    border: none;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.6);
+    position: relative;
+    z-index: 1;
+    transition: 750ms;
+    top: 0;
+    left: 0;
 }
-.header div h2{
-    color: #fff;
-    font-size: 2.1rem;
 
+.header:hover {
+    box-shadow: 2px 2px 3px 4px rgba(0, 0, 0, 0.6);
 }
-.header div ul {
+
+.header h2 {
+    font-size: 2.3em;
+    font-family: 'Poppins', sans-serif;
+    user-select: none;
+    transition: 1s;
+}
+
+.header:hover>h2 {
+    letter-spacing: 2px;
+    transform: scale(0.9);
+}
+/* .header div ul {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -40,4 +61,4 @@
     border-bottom: 1px solid #fff;
     transition: .5s;
     letter-spacing: 0.2px;
-}
+} */

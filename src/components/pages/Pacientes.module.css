@@ -1,5 +1,136 @@
-.list{
-    background-color: red;
-    width: 200px;
-    height: 30px;
+.mainAtendimento {
+    height: 85vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.modalBackDrop {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(5px);
+}
+
+.modalInforPaciente[open] {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 75vh;
+    width: 50vw;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 3px 1px 5px 5px #999;
+    display: flex;
+    flex-direction: column;
+}
+
+.titleModalInfors {
+    height: 15%;
+    width: 100%;
+    background-color: #1baef7;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 1px 1px 5px #2b2b2b;
+    padding: 1.5% 1%;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+}
+
+.modalInforPaciente[open] h4 {
+    align-self: center;
+}
+
+.modalInforPaciente[open] span {
+    font-size: larger;
+    align-self: center;
+}
+
+.formInfors {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 85%;
+    width: 100%;
+    padding: 3%;
+}
+
+.formInfors div {
+    display: flex;
+    flex-direction: column;
+    height: 20%;
+    width: 100%;
+}
+
+.formInfors div label {
+    /* font-size: l; */
+    font-weight: bolder;
+}
+
+.formInfors div input {
+    width: 100%;
+    height: 45%;
+    border: none;
+    border-radius: 10px;
+    padding-left: 3px;
+    box-shadow: 3px 1px 5px #222;
+}
+
+.formInfors div input:focus {
+    appearance: none;
+    outline: none;
+    box-shadow: 0 0 0 0;
+    box-shadow: 1px 1px 3px #1baef7;
+}
+
+.formInfors div button {
+    width: 35%;
+    height: 45%;
+    border: none;
+    border-radius: 10px;
+    padding-left: 3px;
+    box-shadow: 3px 1px 5px #222;
+    align-self: center;
+    transition: 150ms;
+}
+
+.formInfors div button:hover {
+    width: 40%;
+    height: 50%;
+    border: solid 1px #1baef7;
+    transform: scale(1.1);
+}
+
+.topAtendimento {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-direction: row;
+}
+
+.footerAtendimento {
+    width: 100vw;
+    height: 70%;
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    flex-direction: row;
+    position: relative;
+}
+
+.footerAtendimento div {
+    position: static;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: aqua;
 }

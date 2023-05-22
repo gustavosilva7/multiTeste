@@ -14,6 +14,7 @@ export default function App() {
                 <Header />
                 <Routes>
                     <Route path="/" element={<Inicial />}></Route>
+                    <Route path="/pages/:id" element={<Paciente />}></Route>
                     {/* <Route path="/paciente" element={<Paciente />}></Route> */}
                 </Routes>
             </Router> 
