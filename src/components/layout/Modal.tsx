@@ -1,6 +1,6 @@
 import { useState} from 'react';
 import Modal from 'react-bootstrap/Modal';
-// import { IMaskInput } from "react-imask";
+import { IMaskInput } from "react-imask";
 import style from './Modal.module.css'
 import axios from 'axios';
 
@@ -20,7 +20,6 @@ export default function ModalCadPaciente() {
         e.preventDefault()
         axios.post('http://localhost:5566/pacients', dadosFormulario)
             .then(() => {
-                // console.log(response.data);
                 setShow(false)
                 window.location.reload();
             })
@@ -70,20 +69,28 @@ export default function ModalCadPaciente() {
 
                         <div>
                             <label htmlFor="telefone" className={style.labelCad}>Número de celular</label>
-                            <input
+                            {/* <input
                                 type="text" id="telefone" name="phone_number"
-                                // maxLength="15"
+                                className={style.inputModalCad}
+                                placeholder="Digite seu telefone..."
+                                onChange={handleChange}
+                            /> */}
+                            <IMaskInput
+                                mask="(00) 9 0000-0000"
+                                type="text" id="telefone" name="phone_number"
                                 className={style.inputModalCad}
                                 placeholder="Digite seu telefone..."
                                 onChange={handleChange}
                             />
+                            
                         </div>
 
                         <div>
                             <label htmlFor="cpf" className={style.labelCad}>Número do CPF</label>
-                            <input type="text" id="cpf"
+                            <IMaskInput
+                                mask="000.000.000-00"
+                                type="text" id="cpf"
                                 name="identifier"
-                                // maxLength="14"
                                 className={style.inputModalCad}
                                 placeholder="Digite seu CPF..."
                                 onChange={handleChange}
@@ -92,8 +99,9 @@ export default function ModalCadPaciente() {
 
                         <div>
                             <label htmlFor="dataNasc" className={style.labelCad}>Data de nascimento</label>
-                            <input
-                                type="date" id="dataNasc"
+                            <IMaskInput
+                                mask="0000-00-00"
+                                type="text" id="dataNasc"
                                 name="birthdate"
                                 className={style.inputModalCad}
                                 placeholder="Digite sua data de nascimento..."
@@ -111,7 +119,6 @@ export default function ModalCadPaciente() {
                                 onChange={handleChange}
                             />
                         </div>
-
                         <button type="button" onClick={CadPaciente} className={style.btnEnviarPac} id="btnEnviarPac">Enviar</button>
                     </form>
                 </Modal.Body>

@@ -4,6 +4,13 @@ import { useState, useEffect } from "react";
 import { differenceInYears } from 'date-fns';
 import axios from "axios";
 
+import { Navigation } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper-bundle.min.css";
+import "swiper/swiper.min.css";
+
+
+
 interface Paciente {
     name: string;
     identifier: string
@@ -137,10 +144,10 @@ export default function Paciente() {
                                     <img width="100%" height="100%" src={paciente?.image} alt="Foto do paciente" />
                             </div>
                             <div>
-                                <h4>{paciente?.name}</h4>
-                                <span>{formatarCPF(paciente?.identifier)}</span>
+                                <h4>Nome do paciente: <span><i>{paciente?.name}</i></span></h4>
+                                <h5>CPF do paciente: <span><i>{formatarCPF(paciente?.identifier)}</i></span></h5>
                                 {idadeCal &&
-                                    <p>Idade: {idadeCal} anos</p>
+                                    <h5>Idade: <span><i>{idadeCal}</i></span> anos</h5>
                                 }
                             </div>
                             <div>
@@ -152,18 +159,31 @@ export default function Paciente() {
                             </div>
                         </div>
                         <div className={style.footerAtendimento}>
-                            <div>
-                                <p>Temperatura: {temperatura}</p>
-                            </div>
-                            <div>
-                                <p>Pressão Arterial Sistólica: {pressaoSistolica}</p>
-                            </div>
-                            <div>
-                                <p>Pressão Arterial Diastólica: {pressaoDiastolica}</p>
-                            </div>
-                            <div>
-                                <p>Frequência Respiratória: {frequenciaRespiratoria}</p>
-                            </div>
+                            <Swiper
+                                modules={[Navigation]}
+                                className='divss'
+                            >
+                                <SwiperSlide className='itemss'>
+                                    <div>
+                                        <p>Temperatura: {temperatura}</p>
+                                    </div>
+                                </SwiperSlide>
+                                <SwiperSlide className='itemss'>
+                                    <div>
+                                        <p>Pressão Arterial Sistólica: {pressaoSistolica}</p>
+                                    </div>
+                                </SwiperSlide>
+                                <SwiperSlide className='itemss'>
+                                    <div>
+                                        <p>Pressão Arterial Diastólica: {pressaoDiastolica}</p>
+                                    </div>
+                                </SwiperSlide>
+                                <SwiperSlide className='itemss'>
+                                    <div>
+                                        <p>Frequência Respiratória: {frequenciaRespiratoria}</p>
+                                    </div>
+                                </SwiperSlide>
+                            </Swiper>
                         </div>
                     </div>
 

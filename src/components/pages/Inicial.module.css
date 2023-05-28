@@ -48,29 +48,56 @@
     justify-content: center;
     width: 100%;
     position: relative;
-    gap: 10px;
     border-radius: 10px;
     background-color: #1baef7;
     transition: all .5s;
 }
-.uniquePatient:hover{
+
+.uniquePatient:hover {
     transform: scale(1.035);
 }
-.uniquePatient:hover > span{
+
+.uniquePatient:hover>span {
     font-weight: 600;
 }
-.uniquePatient span {
-    width: 22%;
+
+.uniquePatient span:nth-child(1) {
+    width: 40%;
     height: 40px;
-    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.uniquePatient span:nth-child(2) {
+    width: 20%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.uniquePatient span:nth-child(3) {
+    width: 20%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.uniquePatient span:nth-child(4) {
+    width: 8%;
+    height: 40px;
     display: flex;
     align-items: center;
 }
 
 .uniquePatient a {
-    width: 5%;
+    width: 8%;
     height: 40px;
     overflow-x: hidden;
     display: flex;
     align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+    font-size: x-large;
+    font-weight: 900;
 }
