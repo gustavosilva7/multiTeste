@@ -4,10 +4,8 @@ import { useState, useEffect } from "react";
 import { differenceInYears } from 'date-fns';
 import axios from "axios";
 
-import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper-bundle.min.css";
-import "swiper/swiper.min.css";
+import 'swiper/css'
 
 
 
@@ -159,31 +157,18 @@ export default function Paciente() {
                             </div>
                         </div>
                         <div className={style.footerAtendimento}>
-                            <Swiper
-                                modules={[Navigation]}
-                                className='divss'
-                            >
-                                <SwiperSlide className='itemss'>
                                     <div>
                                         <p>Temperatura: {temperatura}</p>
                                     </div>
-                                </SwiperSlide>
-                                <SwiperSlide className='itemss'>
                                     <div>
                                         <p>Pressão Arterial Sistólica: {pressaoSistolica}</p>
                                     </div>
-                                </SwiperSlide>
-                                <SwiperSlide className='itemss'>
                                     <div>
                                         <p>Pressão Arterial Diastólica: {pressaoDiastolica}</p>
                                     </div>
-                                </SwiperSlide>
-                                <SwiperSlide className='itemss'>
                                     <div>
                                         <p>Frequência Respiratória: {frequenciaRespiratoria}</p>
                                     </div>
-                                </SwiperSlide>
-                            </Swiper>
                         </div>
                     </div>
 
