@@ -27,9 +27,11 @@ export default function Paciente() {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:5566/pacients/${id}`, {
+            .get(`http://covid-checker.sintegrada.com.br/api/patients/${id}`, {
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Access-Control-Allow-Headers": "*",
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
                 },
             })
             .then((resp) => {
@@ -66,7 +68,7 @@ export default function Paciente() {
         return `
         ${numerosCPF?.substr(0, 3)}.${numerosCPF?.substr(3, 3)}.${numerosCPF?.substr(6, 3)}-${numerosCPF?.substr(9, 2)}`;
     }
-    
+
     return (
         <div>
             {
@@ -139,7 +141,7 @@ export default function Paciente() {
                     <div className={style.mainAtendimento}>
                         <div className={style.topAtendimento}>
                             <div>
-                                    <img width="100%" height="100%" src={paciente?.image} alt="Foto do paciente" />
+                                <img width="100%" height="100%" src={paciente?.image} alt="Foto do paciente" />
                             </div>
                             <div>
                                 <h4>Nome do paciente: <span><i>{paciente?.name}</i></span></h4>
@@ -157,18 +159,18 @@ export default function Paciente() {
                             </div>
                         </div>
                         <div className={style.footerAtendimento}>
-                                    <div>
-                                        <p>Temperatura: {temperatura}</p>
-                                    </div>
-                                    <div>
-                                        <p>Pressão Arterial Sistólica: {pressaoSistolica}</p>
-                                    </div>
-                                    <div>
-                                        <p>Pressão Arterial Diastólica: {pressaoDiastolica}</p>
-                                    </div>
-                                    <div>
-                                        <p>Frequência Respiratória: {frequenciaRespiratoria}</p>
-                                    </div>
+                            <div>
+                                <p>Temperatura: {temperatura}</p>
+                            </div>
+                            <div>
+                                <p>Pressão Arterial Sistólica: {pressaoSistolica}</p>
+                            </div>
+                            <div>
+                                <p>Pressão Arterial Diastólica: {pressaoDiastolica}</p>
+                            </div>
+                            <div>
+                                <p>Frequência Respiratória: {frequenciaRespiratoria}</p>
+                            </div>
                         </div>
                     </div>
 

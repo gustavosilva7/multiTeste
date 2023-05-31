@@ -57,7 +57,7 @@ export default function Inicial() {
                             <span>Não atendido</span>
                             <span>{formatarCPF(patient?.identifier)}</span>
                             <span>{idadeCal} anos</span>
-                            <Link to={`pages/${patient.id}`}>
+                            <Link to={`pages/Paciente/${patient.id}`}>
                                 <AiOutlineArrowRight />
                             </Link>
                         </div>

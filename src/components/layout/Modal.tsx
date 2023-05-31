@@ -21,7 +21,16 @@ export default function ModalCadPaciente() {
     function CadPaciente(e: { preventDefault: () => void; }) {
         e.preventDefault();
 
-        axios.post("http://covid-checker.sintegrada.com.br/api/patients", dadosFormulario)
+        axios.post("http://covid-checker.sintegrada.com.br/api/patients",
+            {
+                headers: {
+                    "Access-Control-Allow-Headers": "*",
+                    "Content-Type": "multipart/form-data",
+                    Accept: "application/json"
+                },
+                body: dadosFormulario
+            }
+        )
             .then(response => {
                 console.log("certo");
                 setShow(false);
@@ -112,7 +121,7 @@ export default function ModalCadPaciente() {
                         <div>
                             <label htmlFor="fotoPac" className={style.labelCad}>Foto do paciente</label>
                             <input
-                                type="text" id="fotoPac"
+                                type="file" id="fotoPac"
                                 name="image"
                                 className={style.inputModalCad}
                                 placeholder='Foto do paciente'
