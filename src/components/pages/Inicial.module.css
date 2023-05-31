@@ -51,46 +51,19 @@
     border-radius: 10px;
     background-color: #1baef7;
     transition: all .5s;
+    padding: 0 1%;
 }
 
 .uniquePatient:hover {
-    transform: scale(1.035);
+    transform: scale(1.045);
 }
 
 .uniquePatient:hover>span {
     font-weight: 600;
 }
 .uniquePatient span{
-    width: calc(100%/3);
+    width: 20%;
 }
-/* .uniquePatient span:nth-child(1) {
-    width: 40%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-}
-
-.uniquePatient span:nth-child(2) {
-    width: 25%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-}
-
-.uniquePatient span:nth-child(3) {
-    width: 25%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-} */
-
-/* .uniquePatient span:nth-child(4) {
-    width: 8%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-} */
-
 .uniquePatient a {
     width: 8%;
     height: 40px;

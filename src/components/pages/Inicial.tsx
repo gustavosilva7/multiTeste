@@ -15,15 +15,14 @@ interface Patient {
     phone_number: string;
     classificacao: string
 }
+
 export default function Inicial() {
     const [patients, setPatients] = useState<Patient[]>([])
     useEffect(() => {
         axios.get("http://covid-checker.sintegrada.com.br/api/patients")
             .then((response) => {
-                console.log("certo")
+                // console.log("certo")
                 setPatients(response.data.data)
-                // console.log(response.data)
-                // console.log(response.data.data)
             })
             .catch(() => {
                 console.log("erro")
@@ -35,15 +34,7 @@ export default function Inicial() {
         return `
         ${CPFformatado?.substr(0, 3)}.${CPFformatado?.substr(3, 3)}.${CPFformatado?.substr(6, 3)}-${CPFformatado?.substr(9, 2)}`;
     }
-    // function formatarCel(celular: string | undefined): string {
-    //     const Cellformatado = celular?.replace(/\D/g, '');
-    //     return `
-    //         ${Cellformatado?.substring(0, 2)}
-    //         ${Cellformatado?.substring(2,7)}-
-    //         ${Cellformatado?.substring(7,11)}
 
-    //     `;
-    // }
     return (
         <div className={style.mainInicial}>
             <div className={style.divBtnCadPaciente}>
@@ -63,7 +54,7 @@ export default function Inicial() {
                     return (
                         <div className={style.uniquePatient} key={patient.id}>
                             <span>{patient.name}</span>
-                            {/* <span>{formatarCel(patient?.phone_number)}</span> */}
+                            <span>Não atendido</span>
                             <span>{formatarCPF(patient?.identifier)}</span>
                             <span>{idadeCal} anos</span>
                             <Link to={`pages/${patient.id}`}>

@@ -1,7 +1,7 @@
-import { useState} from 'react';
+import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { IMaskInput } from "react-imask";
-import style from './Modal.module.css'
+import style from './Modal.module.css';
 import axios from 'axios';
 
 export default function ModalCadPaciente() {
@@ -10,17 +10,22 @@ export default function ModalCadPaciente() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+
     const [dadosFormulario, setDadosFormulario] = useState({
         name: '',
-        phone_number: '',
         identifier: '',
-        classificacao: 'Não atendido'
+        phone_number: '',
+        birthdate: '',
+        image: ''
     });
     function CadPaciente(e: { preventDefault: () => void; }) {
-        e.preventDefault()
-        axios.post('http://localhost:5566/pacients', dadosFormulario)
-            .then(() => {
-                setShow(false)
+        e.preventDefault();
+
+        axios.post("http://covid-checker.sintegrada.com.br/api/patients", dadosFormulario)
+            .then(response => {
+                console.log("certo");
+                setShow(false);
+                console.log(response.data);
                 window.location.reload();
             })
             .catch(error => {
@@ -28,10 +33,10 @@ export default function ModalCadPaciente() {
             });
     }
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setDadosFormulario(prevState => ({
-            ...prevState,
-            [event.target.name]: event.target.value
+    const handleChange = (e: { target: { name: any; value: any; }; }) => {
+        setDadosFormulario(values => ({
+            ...values,
+            [e.target.name]: e.target.value
         }));
     };
 
@@ -48,9 +53,9 @@ export default function ModalCadPaciente() {
                 backdrop="static"
                 keyboard={false}
                 size="lg"
-
                 aria-labelledby="contained-modal-title-vcenter"
-                centered>
+                centered
+            >
                 <Modal.Header closeButton>
                     <Modal.Title>Cadastro de Paciente</Modal.Title>
                 </Modal.Header>
@@ -68,24 +73,6 @@ export default function ModalCadPaciente() {
                         </div>
 
                         <div>
-                            <label htmlFor="telefone" className={style.labelCad}>Número de celular</label>
-                            {/* <input
-                                type="text" id="telefone" name="phone_number"
-                                className={style.inputModalCad}
-                                placeholder="Digite seu telefone..."
-                                onChange={handleChange}
-                            /> */}
-                            <IMaskInput
-                                mask="(00) 9 0000-0000"
-                                type="text" id="telefone" name="phone_number"
-                                className={style.inputModalCad}
-                                placeholder="Digite seu telefone..."
-                                onChange={handleChange}
-                            />
-                            
-                        </div>
-
-                        <div>
                             <label htmlFor="cpf" className={style.labelCad}>Número do CPF</label>
                             <IMaskInput
                                 mask="000.000.000-00"
@@ -96,6 +83,19 @@ export default function ModalCadPaciente() {
                                 onChange={handleChange}
                             />
                         </div>
+
+                        <div>
+                            <label htmlFor="telefone" className={style.labelCad}>Número de celular</label>
+                            <IMaskInput
+                                mask="(00) 9 0000-0000"
+                                type="text" id="telefone" name="phone_number"
+                                className={style.inputModalCad}
+                                placeholder="Digite seu telefone..."
+                                onChange={handleChange}
+                            />
+
+                        </div>
+
 
                         <div>
                             <label htmlFor="dataNasc" className={style.labelCad}>Data de nascimento</label>
@@ -126,4 +126,3 @@ export default function ModalCadPaciente() {
         </>
     );
 }
-
