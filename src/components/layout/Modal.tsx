@@ -10,27 +10,36 @@ export default function ModalCadPaciente() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    interface FormData {
+        name: string;
+        identifier: string;
+        phone_number: string;
+        birthdate: string;
+        image: File | null;
+    }
 
-    const [dadosFormulario, setDadosFormulario] = useState({
+    const [dadosFormulario, setDadosFormulario] = useState<FormData>({
         name: '',
         identifier: '',
-        phone_number: '',
         birthdate: '',
-        image: ''
+        phone_number: '',
+        image: null
     });
-    function CadPaciente(e: { preventDefault: () => void; }) {
+
+    function CadPaciente(e: React.FormEvent) {
         e.preventDefault();
 
-        axios.post("http://covid-checker.sintegrada.com.br/api/patients",
-            {
-                headers: {
-                    "Access-Control-Allow-Headers": "*",
-                    "Content-Type": "multipart/form-data",
-                    Accept: "application/json"
-                },
-                body: dadosFormulario
-            }
-        )
+
+        const formData = new FormData();
+        formData.append('name', dadosFormulario.name);
+        formData.append('identifier', dadosFormulario.identifier);
+        formData.append('phone_number', dadosFormulario.phone_number);
+        formData.append('birthdate', dadosFormulario.birthdate);
+        if (dadosFormulario.image) {
+            formData.append('image', dadosFormulario.image);
+        }
+
+        axios.post("http://covid-checker.sintegrada.com.br/api/patients", formData)
             .then(response => {
                 console.log("certo");
                 setShow(false);
@@ -42,13 +51,21 @@ export default function ModalCadPaciente() {
             });
     }
 
-    const handleChange = (e: { target: { name: any; value: any; }; }) => {
-        setDadosFormulario(values => ({
-            ...values,
-            [e.target.name]: e.target.value
-        }));
-    };
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value, files } = e.target;
 
+        if (name === 'image' && files && files.length > 0) {
+            setDadosFormulario(values => ({
+                ...values,
+                [name]: files[0]
+            }));
+        } else {
+            setDadosFormulario(values => ({
+                ...values,
+                [name]: value
+            }));
+        }
+    };
 
     return (
         <>
@@ -69,11 +86,12 @@ export default function ModalCadPaciente() {
                     <Modal.Title>Cadastro de Paciente</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form className={style.formCadPaciente} method="post">
+                    <form className={style.formCadPaciente} encType="multipart/form-data" onSubmit={CadPaciente}>
                         <div>
                             <label htmlFor="name" className={style.labelCad}>Nome completo</label>
                             <input
-                                type="text" id="name"
+                                type="text"
+                                id="name"
                                 name="name"
                                 className={style.inputModalCad}
                                 placeholder="Digite seu nome..."
@@ -84,8 +102,9 @@ export default function ModalCadPaciente() {
                         <div>
                             <label htmlFor="cpf" className={style.labelCad}>Número do CPF</label>
                             <IMaskInput
-                                mask="000.000.000-00"
-                                type="text" id="cpf"
+                                mask="00000000000"
+                                type="text"
+                                id="cpf"
                                 name="identifier"
                                 className={style.inputModalCad}
                                 placeholder="Digite seu CPF..."
@@ -96,21 +115,22 @@ export default function ModalCadPaciente() {
                         <div>
                             <label htmlFor="telefone" className={style.labelCad}>Número de celular</label>
                             <IMaskInput
-                                mask="(00) 9 0000-0000"
-                                type="text" id="telefone" name="phone_number"
+                                mask="00900000000"
+                                type="text"
+                                id="telefone"
+                                name="phone_number"
                                 className={style.inputModalCad}
                                 placeholder="Digite seu telefone..."
                                 onChange={handleChange}
                             />
-
                         </div>
-
 
                         <div>
                             <label htmlFor="dataNasc" className={style.labelCad}>Data de nascimento</label>
                             <IMaskInput
                                 mask="0000-00-00"
-                                type="text" id="dataNasc"
+                                type="text"
+                                id="dataNasc"
                                 name="birthdate"
                                 className={style.inputModalCad}
                                 placeholder="Digite sua data de nascimento..."
@@ -121,14 +141,15 @@ export default function ModalCadPaciente() {
                         <div>
                             <label htmlFor="fotoPac" className={style.labelCad}>Foto do paciente</label>
                             <input
-                                type="file" id="fotoPac"
+                                type="file"
+                                id="fotoPac"
                                 name="image"
                                 className={style.inputModalCad}
                                 placeholder='Foto do paciente'
                                 onChange={handleChange}
                             />
                         </div>
-                        <button type="button" onClick={CadPaciente} className={style.btnEnviarPac} id="btnEnviarPac">Enviar</button>
+                        <button type="submit" className={style.btnEnviarPac} id="btnEnviarPac">Enviar</button>
                     </form>
                 </Modal.Body>
             </Modal>

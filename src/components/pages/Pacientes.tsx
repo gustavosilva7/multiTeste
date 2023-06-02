@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { differenceInYears } from 'date-fns';
 import axios from "axios";
 
-import { Swiper, SwiperSlide } from "swiper/react";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import {Navigation} from "swiper"
 import 'swiper/css'
 
 
@@ -171,6 +172,7 @@ export default function Paciente() {
                             <div>
                                 <p>Frequência Respiratória: {frequenciaRespiratoria}</p>
                             </div>
+
                         </div>
                     </div>
 
