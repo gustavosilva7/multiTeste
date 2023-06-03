@@ -3,10 +3,8 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { differenceInYears } from 'date-fns';
 import axios from "axios";
+import ModalAtenderPac from '../layout/ModalAtenderPaciente';
 
-// import { Swiper, SwiperSlide } from "swiper/react";
-// import {Navigation} from "swiper"
-import 'swiper/css'
 
 
 
@@ -53,8 +51,6 @@ export default function Paciente() {
         event.preventDefault();
         setmodalMaisInforPac(false);
     };
-
-
     const pacienteIdade = paciente?.birthdate;
     let idadeCal;
     if (pacienteIdade) {
@@ -62,8 +58,6 @@ export default function Paciente() {
         const dataFormatada = `${ano}-${mes}-${dia}`;
         idadeCal = differenceInYears(new Date(), new Date(dataFormatada));
     }
-
-
     function formatarCPF(cpf: string | undefined): string {
         const numerosCPF = cpf?.replace(/\D/g, '');
         return `
@@ -141,23 +135,17 @@ export default function Paciente() {
 
                     <div className={style.mainAtendimento}>
                         <div className={style.topAtendimento}>
-                            <div>
-                                <img width="100%" height="100%" src={paciente?.image} alt="Foto do paciente" />
-                                {/* <h6>{paciente?.image}</h6> */}
-                            </div>
-                            <div>
+
+                            <div className={style.ladoOneTop}>
                                 <h4>Nome do paciente: <span><i>{paciente?.name}</i></span></h4>
                                 <h5>CPF do paciente: <span><i>{formatarCPF(paciente?.identifier)}</i></span></h5>
                                 {idadeCal &&
                                     <h5>Idade: <span><i>{idadeCal}</i></span> anos</h5>
                                 }
                             </div>
-                            <div>
-                                <button onClick={() => {
-                                    alert(formatarCPF(paciente?.identifier))
-                                }}>
-                                    Atender Paciente
-                                </button>
+                            <div className={style.ladoTwoTop}>
+                                
+                               <ModalAtenderPac />
                             </div>
                         </div>
                         <div className={style.footerAtendimento}>
@@ -173,7 +161,6 @@ export default function Paciente() {
                             <div>
                                 <p>Frequência Respiratória: {frequenciaRespiratoria}</p>
                             </div>
-
                         </div>
                     </div>
 
