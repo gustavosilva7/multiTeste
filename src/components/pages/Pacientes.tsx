@@ -36,7 +36,7 @@ export default function Paciente() {
                 },
             })
             .then((resp) => {
-                setPaciente(resp.data);
+                setPaciente(resp.data.data);
             })
             .catch(() => {
                 console.log("erro");
@@ -143,6 +143,7 @@ export default function Paciente() {
                         <div className={style.topAtendimento}>
                             <div>
                                 <img width="100%" height="100%" src={paciente?.image} alt="Foto do paciente" />
+                                {/* <h6>{paciente?.image}</h6> */}
                             </div>
                             <div>
                                 <h4>Nome do paciente: <span><i>{paciente?.name}</i></span></h4>

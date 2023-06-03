@@ -21,7 +21,6 @@ export default function Inicial() {
     useEffect(() => {
         axios.get("http://covid-checker.sintegrada.com.br/api/patients")
             .then((response) => {
-                // console.log("certo")
                 setPatients(response.data.data)
             })
             .catch(() => {
@@ -40,7 +39,7 @@ export default function Inicial() {
             <div className={style.divBtnCadPaciente}>
                 <ModalCadPaciente />
             </div>
-           
+
             <div className={style.listPatients}>
                 {patients.map((patient) => {
                     const pacienteIdade = patient.birthdate;
@@ -57,7 +56,7 @@ export default function Inicial() {
                             <span>Não atendido</span>
                             <span>{formatarCPF(patient?.identifier)}</span>
                             <span>{idadeCal} anos</span>
-                            <Link to={`pages/Paciente/${patient.id}`}>
+                            <Link to={`pages/${patient.id}`}>
                                 <AiOutlineArrowRight />
                             </Link>
                         </div>
