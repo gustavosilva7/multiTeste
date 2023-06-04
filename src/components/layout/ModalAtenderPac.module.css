@@ -33,5 +33,17 @@
     height: 75%;
     width: 50%;
     transform: translate(-50%, -50%);
-    
+}
+.headerModalAtenderPaciente {
+    height: 10%;
+    width: 100%;
+}
+
+.mainModalAtenderPaciente {
+    height: 10%;
+    width: 100%;
+}
+.formModalAtenderPaciente{
+    height: 100%;
+    width: 100%;
 }

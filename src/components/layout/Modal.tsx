@@ -41,9 +41,7 @@ export default function ModalCadPaciente() {
 
         axios.post("http://covid-checker.sintegrada.com.br/api/patients", formData)
             .then(response => {
-                console.log("certo");
                 setShow(false);
-                console.log(response.data);
                 window.location.reload();
             })
             .catch(error => {

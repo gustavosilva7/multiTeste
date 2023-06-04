@@ -45,6 +45,7 @@ export default function Paciente() {
     const [pressaoSistolica, setPressaoSistolica] = useState("");
     const [pressaoDiastolica, setPressaoDiastolica] = useState("");
     const [frequenciaRespiratoria, setFrequenciaRespiratoria] = useState("");
+    const [frequenciaCardiaca, setFrequenciaCardiaca] = useState("");
 
     const [modalMaisInforPac, setmodalMaisInforPac] = useState(true);
     const enviarInforsAdd = (event: { preventDefault: () => void; }) => {
@@ -115,9 +116,20 @@ export default function Paciente() {
                                             type="number"
                                             id="infoFrequencia"
                                             name="infoFrequencia"
-                                            placeholder="Digite a frequência do paciente"
+                                            placeholder="Digite a frequência respiratória do paciente"
                                             value={frequenciaRespiratoria}
                                             onChange={(event) => setFrequenciaRespiratoria(event.target.value)}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="infoFrequenciaCa">Informe a frequência Cardíaca</label>
+                                        <input
+                                            type="number"
+                                            id="infoFrequenciaCa"
+                                            name="infoFrequenciaCa"
+                                            placeholder="Digite a frequência cardíaca do paciente"
+                                            value={frequenciaCardiaca}
+                                            onChange={(event) => setFrequenciaCardiaca(event.target.value)}
                                         />
                                     </div>
                                     <div>
@@ -160,6 +172,9 @@ export default function Paciente() {
                             </div>
                             <div>
                                 <p>Frequência Respiratória: {frequenciaRespiratoria}</p>
+                            </div>
+                            <div>
+                                <p>Frequência Cadíaca: {frequenciaCardiaca}</p>
                             </div>
                         </div>
                     </div>
