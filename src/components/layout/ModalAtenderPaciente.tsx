@@ -41,22 +41,24 @@ export default function ModalAtenderPac() {
             });
     }, [id]);
 
-    const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { value, checked } = event.target;
-        if (checked) {
-            setSintomasSelecionados((prevSelecionados) => [...prevSelecionados, value]);
-        } else {
-            setSintomasSelecionados((prevSelecionados) =>
-                prevSelecionados.filter((sintoma) => sintoma !== value)
-            );
-        }
-    };
+    // const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //     const { value, checked } = event.target;
+    //     if (checked) {
+    //         setSintomasSelecionados((prevSelecionados) => [...prevSelecionados, value]);
+    //     } else {
+    //         setSintomasSelecionados((prevSelecionados) =>
+    //             prevSelecionados.filter((sintoma) => sintoma !== value)
+    //         );
+    //     }
+    // };
+
+    // const inforsPaciente = localStorage.getItem('inforsPaciente');
+
+    // console.log(inforsPaciente)
 
     return (
         <div>
-            <button className={style.btnAtenderPaciente} onClick={handleShow}>
-                Atender Paciente
-            </button>
+            <button className={style.btnAtenderPaciente} onClick={handleShow}>Atender Paciente</button>
             {show && (
                 <div className={style.divmodalAtenderPaciente}>
                     <dialog open={show} className={style.modalAtenderPaciente}>
@@ -66,7 +68,7 @@ export default function ModalAtenderPac() {
                         <main className={style.mainModalAtenderPaciente}>
                             <form className={style.formModalAtenderPaciente}>
                                 <h3>brabo</h3>
-                                {pacienteEmAtendimento.map((pa) => (
+                                {/* {pacienteEmAtendimento.map((pa) => (
                                     <div key={pa.id}>
                                         {pa.symptoms.map((symptom) => (
                                             <div key={symptom.name}>
@@ -78,11 +80,23 @@ export default function ModalAtenderPac() {
                                                         onChange={handleCheckboxChange}
                                                     />
                                                     {symptom.name}
+
                                                 </label>
+
                                             </div>
                                         ))}
                                     </div>
-                                ))}
+                                ))} */}
+
+                                <input type="checkbox" /> 1
+                                <br />
+                                <input type="checkbox"/> 2
+                                <br />
+                                <input type="checkbox" /> 3
+                                <br />
+                                <input type="checkbox" /> 4
+                                <br />
+                                <input type="checkbox" /> 5
                             </form>
                         </main>
                     </dialog>
