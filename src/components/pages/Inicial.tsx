@@ -33,6 +33,7 @@ export default function Inicial() {
         return `
         ${CPFformatado?.substr(0, 3)}.${CPFformatado?.substr(3, 3)}.${CPFformatado?.substr(6, 3)}-${CPFformatado?.substr(9, 2)}`;
     }
+    
 
     return (
         <div className={style.mainInicial}>

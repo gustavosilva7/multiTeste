@@ -79,7 +79,7 @@ export default function Paciente() {
         setinforsPaciente(formData);
         setmodalMaisInforPac(false)
 
-        console.log(inforsPaciente);
+        // console.log(inforsPaciente);
         localStorage.setItem('inforsPaciente', JSON.stringify(formData));
 
         // axios

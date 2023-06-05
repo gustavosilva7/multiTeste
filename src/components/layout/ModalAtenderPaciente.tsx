@@ -41,20 +41,60 @@ export default function ModalAtenderPac() {
             });
     }, [id]);
 
-    // const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //     const { value, checked } = event.target;
-    //     if (checked) {
-    //         setSintomasSelecionados((prevSelecionados) => [...prevSelecionados, value]);
-    //     } else {
-    //         setSintomasSelecionados((prevSelecionados) =>
-    //             prevSelecionados.filter((sintoma) => sintoma !== value)
-    //         );
-    //     }
-    // };
 
-    // const inforsPaciente = localStorage.getItem('inforsPaciente');
+    const handleFinalizar = () => {
+        const form = document.getElementById('modalForm');
+        if (form) {
+            const checkboxes = form.getElementsByTagName('input');
+            const totalInputs = checkboxes.length;
+            let marcados = 0;
+            const selectedSintomas = [];
 
-    // console.log(inforsPaciente)
+            for (let i = 0; i < checkboxes.length; i++) {
+                const checkbox = checkboxes[i];
+
+                if (checkbox.checked) {
+                    marcados++;
+                    selectedSintomas.push(parseInt(checkbox.id));
+                }
+            }
+
+            const porcentagem = (marcados / totalInputs) * 100;
+            console.log(`Porcentagem marcada: ${porcentagem}%`);
+
+            if (porcentagem <= 39) {
+                console.log("Condição: Sintomas insuficientes");
+            } else if (porcentagem <= 59) {
+                console.log("Condição: Potencial Infectado");
+            } else if (porcentagem >= 60) {
+                console.log("Condição: Possível Infectado");
+            } else {
+                console.log("ta bom");
+            }
+
+            setSintomasSelecionados(selectedSintomas.map(String));
+
+            const LocalInforsPaciente = localStorage.getItem('inforsPaciente');
+
+            if (LocalInforsPaciente) {
+                const inforsPaciente = JSON.parse(LocalInforsPaciente);
+                inforsPaciente.symptoms = selectedSintomas
+
+                axios
+                .post(`http://covid-checker.sintegrada.com.br/api/attendance`, inforsPaciente)
+                .then(() => {
+                        console.log("certo");
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+                console.log(inforsPaciente);
+            }
+
+            console.log(selectedSintomas);
+        }
+    };
+
 
     return (
         <div>
@@ -66,37 +106,36 @@ export default function ModalAtenderPac() {
                             <button onClick={handleClose}>x</button>
                         </header>
                         <main className={style.mainModalAtenderPaciente}>
-                            <form className={style.formModalAtenderPaciente}>
-                                <h3>brabo</h3>
-                                {/* {pacienteEmAtendimento.map((pa) => (
-                                    <div key={pa.id}>
-                                        {pa.symptoms.map((symptom) => (
-                                            <div key={symptom.name}>
-                                                <label>
-                                                    <input
-                                                        type="checkbox"
-                                                        value={symptom.name}
-                                                        checked={sintomasSelecionados.includes(symptom.name)}
-                                                        onChange={handleCheckboxChange}
-                                                    />
-                                                    {symptom.name}
+                            <form className={style.formModalAtenderPaciente} id="modalForm">
+                                <div>
+                                    <label htmlFor="tosse">
+                                        <input type="checkbox" name="tosse" id="5" />Tosse
+                                    </label>
+                                </div>
+                                <div>
+                                    <label htmlFor="Dificuldade_de_respirar">
+                                        <input type="checkbox" name="Dificuldade_de_respirar" id="10" />Dificuldade de respirar
+                                    </label>
+                                </div>
+                                <div>
+                                    <label htmlFor="Falta_de_olfato">
+                                        <input type="checkbox" name="Falta_de_olfato" id="12" />Falta de olfato
+                                    </label>
+                                </div>
+                                <div>
+                                    <label htmlFor="Coriza">
+                                        <input type="checkbox" name="Coriza" id="2" />Coriza
+                                    </label>
+                                </div>
+                                <div>
+                                    <label htmlFor="Nariz_entupido">
+                                        <input type="checkbox" name="Nariz_entupido" id="3" />Nariz entupido
+                                    </label>
+                                </div>
 
-                                                </label>
-
-                                            </div>
-                                        ))}
-                                    </div>
-                                ))} */}
-
-                                <input type="checkbox" /> 1
-                                <br />
-                                <input type="checkbox"/> 2
-                                <br />
-                                <input type="checkbox" /> 3
-                                <br />
-                                <input type="checkbox" /> 4
-                                <br />
-                                <input type="checkbox" /> 5
+                                <div>
+                                    <button type="button" onClick={handleFinalizar}>Finalizar</button>
+                                </div>
                             </form>
                         </main>
                     </dialog>
