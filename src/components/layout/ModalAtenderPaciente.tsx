@@ -83,12 +83,13 @@ export default function ModalAtenderPac() {
                 axios
                 .post(`http://covid-checker.sintegrada.com.br/api/attendance`, inforsPaciente)
                 .then(() => {
-                        console.log("certo");
+                        setTimeout(()=>{
+                            setShow(false)
+                        }, 1000)
                     })
                     .catch((error) => {
                         console.log(error);
                     });
-                console.log(inforsPaciente);
             }
 
             console.log(selectedSintomas);
@@ -108,27 +109,27 @@ export default function ModalAtenderPac() {
                         <main className={style.mainModalAtenderPaciente}>
                             <form className={style.formModalAtenderPaciente} id="modalForm">
                                 <div>
-                                    <label htmlFor="tosse">
+                                    <label htmlFor="5">
                                         <input type="checkbox" name="tosse" id="5" />Tosse
                                     </label>
                                 </div>
                                 <div>
-                                    <label htmlFor="Dificuldade_de_respirar">
+                                    <label htmlFor="10">
                                         <input type="checkbox" name="Dificuldade_de_respirar" id="10" />Dificuldade de respirar
                                     </label>
                                 </div>
                                 <div>
-                                    <label htmlFor="Falta_de_olfato">
+                                    <label htmlFor="12">
                                         <input type="checkbox" name="Falta_de_olfato" id="12" />Falta de olfato
                                     </label>
                                 </div>
                                 <div>
-                                    <label htmlFor="Coriza">
+                                    <label htmlFor="2">
                                         <input type="checkbox" name="Coriza" id="2" />Coriza
                                     </label>
                                 </div>
                                 <div>
-                                    <label htmlFor="Nariz_entupido">
+                                    <label htmlFor="3">
                                         <input type="checkbox" name="Nariz_entupido" id="3" />Nariz entupido
                                     </label>
                                 </div>
