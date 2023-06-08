@@ -1,9 +1,11 @@
-import style from './Pacientes.module.css';
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { differenceInYears } from 'date-fns';
 import axios from "axios";
 import ModalAtenderPac from '../layout/ModalAtenderPaciente';
+import {decode} from "base64-img"
+
+import style from './Pacientes.module.css';
 
 interface Paciente {
     name: string;
@@ -25,7 +27,6 @@ interface FormData {
     symptoms: number[]
 }
 
-
 export default function Paciente() {
     const { id } = useParams();
     const [paciente, setPaciente] = useState<Paciente | null>(null);
@@ -41,12 +42,13 @@ export default function Paciente() {
             })
             .then((resp) => {
                 setPaciente(resp.data.data);
+                console.log(resp.data.data)
+                console.log(resp.data.data.image)
             })
             .catch(() => {
                 console.log("erro");
             });
     }, [id]);
-
 
     const [inforsPaciente, setinforsPaciente] = useState<FormData>({
         patient_id: id,
@@ -55,7 +57,7 @@ export default function Paciente() {
         diastolic_pressure: "",
         respiratory_rate: "",
         pulse: "",
-        symptoms: [5, 10, 12, 2, 3],
+        symptoms: [],
     });
     const [temperatura, setTemperatura] = useState("");
     const [pressaoSistolica, setPressaoSistolica] = useState("");
@@ -79,19 +81,8 @@ export default function Paciente() {
         setinforsPaciente(formData);
         setmodalMaisInforPac(false)
 
-        // console.log(inforsPaciente);
         localStorage.setItem('inforsPaciente', JSON.stringify(formData));
-
-        // axios
-        // .post(`http://covid-checker.sintegrada.com.br/api/attendance`, formData)
-        // .then(() => {
-        //         console.log("certo");
-        //     })
-        //     .catch((error) => {
-        //         console.log(error);
-        //     });
     };
-
 
     const pacienteIdade = paciente?.birthdate;
     let idadeCal;
@@ -185,9 +176,14 @@ export default function Paciente() {
                 <div className={style.mainAtendimento}>
                     <div className={style.topAtendimento}>
                         <div className={style.ladoOneTop}>
-                            <h4>Nome do paciente: <span><i>{paciente?.name}</i></span></h4>
-                            <h5>CPF do paciente: <span><i>{formatarCPF(paciente?.identifier)}</i></span></h5>
-                            {idadeCal && <h5>Idade: <span><i>{idadeCal}</i></span> anos</h5>}
+                            {paciente && (
+                                <>
+                                    <h4>Nome do paciente: <span><i>{paciente.name}</i></span></h4>
+                                    <h5>CPF do paciente: <span><i>{formatarCPF(paciente.identifier)}</i></span></h5>
+                                    {idadeCal && <h5>Idade: <span><i>{idadeCal}</i></span> anos</h5>}
+                                    {/* <img src={paciente?.image} alt="Imagem do paciente" /> */}
+                                </>
+                            )}
                         </div>
                         <div className={style.ladoTwoTop}>
                             <ModalAtenderPac />
@@ -207,7 +203,7 @@ export default function Paciente() {
                             <p>Frequência Respiratória: {frequenciaRespiratoria}</p>
                         </div>
                         <div>
-                            <p>Frequência Cadíaca: {frequenciaCardiaca}</p>
+                            <p>Frequência Cardíaca: {frequenciaCardiaca}</p>
                         </div>
                     </div>
                 </div>
@@ -215,4 +211,3 @@ export default function Paciente() {
         </div>
     );
 }
-

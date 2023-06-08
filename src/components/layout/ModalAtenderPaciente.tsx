@@ -34,6 +34,7 @@ export default function ModalAtenderPac() {
                 const data = resp.data.data;
                 if (Array.isArray(data)) {
                     setPacienteEmAtendimento(data);
+                    
                 }
             })
             .catch(() => {
