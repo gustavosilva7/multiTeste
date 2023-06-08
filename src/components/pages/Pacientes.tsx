@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { differenceInYears } from 'date-fns';
 import axios from "axios";
 import ModalAtenderPac from '../layout/ModalAtenderPaciente';
-import {decode} from "base64-img"
 
 import style from './Pacientes.module.css';
 
