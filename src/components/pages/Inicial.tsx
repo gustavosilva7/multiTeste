@@ -51,13 +51,9 @@ export default function Inicial() {
         fetchPatients();
     }, []);
 
-    
     function calculateSymptomPercentage(attendance: any): number {
-        const symptoms = parseInt(attendance.symptoms?.length || 0, 10);
-        const totalSymptoms = parseInt(attendance.total_symptoms || 0, 10);
-
-        console.log('Symptoms:', symptoms);
-        console.log('Total Symptoms:', totalSymptoms);
+        const symptoms = attendance.symptoms?.length || 0;
+        const totalSymptoms: number = 5;
 
         if (symptoms === 0 || totalSymptoms === 0) {
             return 0;
@@ -66,23 +62,20 @@ export default function Inicial() {
         return (symptoms / totalSymptoms) * 100;
     }
 
-
-
     function getCondition(percentage: number): string {
-        console.log('Percentage:', percentage);
+        // console.log('Percentage:', percentage);
 
         if (percentage >= 0 && percentage < 40) {
-            console.log('Sintomas insuficientes');
+            // console.log('Sintomas insuficientes');
             return 'Sintomas insuficientes';
         } else if (percentage >= 40 && percentage < 60) {
-            console.log('Potencialmente infectado');
+            // console.log('Potencialmente infectado');
             return 'Potencialmente infectado';
         } else {
-            console.log('Possível infectado');
+            // console.log('Possível infectado');
             return 'Possível infectado';
         }
     }
-
 
     function formatarCPF(cpf: string | undefined): string {
         const CPFformatado = cpf?.replace(/\D/g, '');
