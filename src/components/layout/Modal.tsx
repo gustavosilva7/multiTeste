@@ -29,15 +29,33 @@ export default function ModalCadPaciente() {
     function CadPaciente(e: React.FormEvent) {
         e.preventDefault();
 
+        function formatarCPF(cpf: string | undefined): string {
+            const numerosCPF = cpf?.replace(/\D/g, '');
+            return `${numerosCPF?.substr(0, 3)}${numerosCPF?.substr(3, 3)}${numerosCPF?.substr(6, 3)}${numerosCPF?.substr(9, 2)}`;
+        }
+        function formatarCell(cell: string | undefined): string {
+            const numerosCell = cell?.replace(/\D/g, '');
+            return `${numerosCell?.substr(0, 3)}${numerosCell?.substr(3, 3)}${numerosCell?.substr(6, 3)}${numerosCell?.substr(9, 2)}`;
+        }
+
+        const CPFformulario = formatarCPF(dadosFormulario.identifier)
+        const Cellformulario = formatarCell(dadosFormulario.phone_number)
 
         const formData = new FormData();
         formData.append('name', dadosFormulario.name);
-        formData.append('identifier', dadosFormulario.identifier);
-        formData.append('phone_number', dadosFormulario.phone_number);
+        formData.append('identifier', CPFformulario);
+        formData.append('phone_number', Cellformulario);
         formData.append('birthdate', dadosFormulario.birthdate);
         if (dadosFormulario.image) {
             formData.append('image', dadosFormulario.image);
         }
+
+        console.log(dadosFormulario)
+        formData.forEach((value, key) => {
+            console.log(key + ': ' + value);
+        });
+
+
 
         axios.post("http://covid-checker.sintegrada.com.br/api/patients", formData)
             .then(response => {
@@ -100,7 +118,7 @@ export default function ModalCadPaciente() {
                         <div>
                             <label htmlFor="cpf" className={style.labelCad}>Número do CPF</label>
                             <IMaskInput
-                                mask="00000000000"
+                                mask="000.000.000-00"
                                 type="text"
                                 id="cpf"
                                 name="identifier"
@@ -113,7 +131,7 @@ export default function ModalCadPaciente() {
                         <div>
                             <label htmlFor="telefone" className={style.labelCad}>Número de celular</label>
                             <IMaskInput
-                                mask="00900000000"
+                                mask="(00) 9 0000-0000"
                                 type="text"
                                 id="telefone"
                                 name="phone_number"
@@ -154,3 +172,4 @@ export default function ModalCadPaciente() {
         </>
     );
 }
+

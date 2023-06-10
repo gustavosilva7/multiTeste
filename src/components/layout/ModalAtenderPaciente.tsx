@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import style from './ModalAtenderPac.module.css';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 interface Symptom {
     name: string;
@@ -34,7 +34,7 @@ export default function ModalAtenderPac() {
                 const data = resp.data.data;
                 if (Array.isArray(data)) {
                     setPacienteEmAtendimento(data);
-                    
+
                 }
             })
             .catch(() => {
@@ -60,19 +60,6 @@ export default function ModalAtenderPac() {
                 }
             }
 
-            const porcentagem = (marcados / totalInputs) * 100;
-            console.log(`Porcentagem marcada: ${porcentagem}%`);
-
-            if (porcentagem <= 39) {
-                console.log("Condição: Sintomas insuficientes");
-            } else if (porcentagem <= 59) {
-                console.log("Condição: Potencial Infectado");
-            } else if (porcentagem >= 60) {
-                console.log("Condição: Possível Infectado");
-            } else {
-                console.log("ta bom");
-            }
-
             setSintomasSelecionados(selectedSintomas.map(String));
 
             const LocalInforsPaciente = localStorage.getItem('inforsPaciente');
@@ -82,9 +69,9 @@ export default function ModalAtenderPac() {
                 inforsPaciente.symptoms = selectedSintomas
 
                 axios
-                .post(`http://covid-checker.sintegrada.com.br/api/attendance`, inforsPaciente)
-                .then(() => {
-                        setTimeout(()=>{
+                    .post(`http://covid-checker.sintegrada.com.br/api/attendance`, inforsPaciente)
+                    .then(() => {
+                        setTimeout(() => {
                             setShow(false)
                         }, 1000)
                     })
@@ -92,12 +79,8 @@ export default function ModalAtenderPac() {
                         console.log(error);
                     });
             }
-
-            console.log(selectedSintomas);
         }
-    };
-
-
+    }
     return (
         <div>
             <button className={style.btnAtenderPaciente} onClick={handleShow}>Atender Paciente</button>
@@ -105,38 +88,38 @@ export default function ModalAtenderPac() {
                 <div className={style.divmodalAtenderPaciente}>
                     <dialog open={show} className={style.modalAtenderPaciente}>
                         <header className={style.headerModalAtenderPaciente}>
-                            <button onClick={handleClose}>x</button>
+                            <h4>Insira os sintomas do paciente</h4>
+                            <button onClick={handleClose} className={style.closeModalAtenderPaciente}>x</button>
                         </header>
                         <main className={style.mainModalAtenderPaciente}>
                             <form className={style.formModalAtenderPaciente} id="modalForm">
-                                <div>
+                                <div className={style.simptom}>
                                     <label htmlFor="5">
                                         <input type="checkbox" name="tosse" id="5" />Tosse
                                     </label>
                                 </div>
-                                <div>
+                                <div className={style.simptom}>
                                     <label htmlFor="10">
                                         <input type="checkbox" name="Dificuldade_de_respirar" id="10" />Dificuldade de respirar
                                     </label>
                                 </div>
-                                <div>
+                                <div className={style.simptom}>
                                     <label htmlFor="12">
                                         <input type="checkbox" name="Falta_de_olfato" id="12" />Falta de olfato
                                     </label>
                                 </div>
-                                <div>
+                                <div className={style.simptom}>
                                     <label htmlFor="2">
                                         <input type="checkbox" name="Coriza" id="2" />Coriza
                                     </label>
                                 </div>
-                                <div>
+                                <div className={style.simptom}>
                                     <label htmlFor="3">
                                         <input type="checkbox" name="Nariz_entupido" id="3" />Nariz entupido
                                     </label>
                                 </div>
-
-                                <div>
-                                    <button type="button" onClick={handleFinalizar}>Finalizar</button>
+                                <div className={style.btnEnviarSimptoms}>
+                                    <button type="button" onClick={handleFinalizar}><Link to="/" className={style.enviarSimptoms}>Finalizar</Link></button>
                                 </div>
                             </form>
                         </main>

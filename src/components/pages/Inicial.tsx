@@ -63,16 +63,11 @@ export default function Inicial() {
     }
 
     function getCondition(percentage: number): string {
-        // console.log('Percentage:', percentage);
-
         if (percentage >= 0 && percentage < 40) {
-            // console.log('Sintomas insuficientes');
             return 'Sintomas insuficientes';
         } else if (percentage >= 40 && percentage < 60) {
-            // console.log('Potencialmente infectado');
             return 'Potencialmente infectado';
         } else {
-            // console.log('Possível infectado');
             return 'Possível infectado';
         }
     }
