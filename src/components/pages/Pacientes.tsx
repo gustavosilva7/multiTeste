@@ -190,11 +190,7 @@ export default function Paciente() {
                             {paciente && (
                                 <>
                                     <h4>Nome do paciente: <span><i>{paciente.name}</i></span>
-                                        <button onClick={() => setShowAttendance(true)}>
-                                            Exibir Atendimentos
-                                        </button>
-                                        {showAttendance && <GetAttendance />}
-
+                                        {!showAttendance && <GetAttendance />}
                                     </h4>
                                     <h5>CPF do paciente: <span><i>{formatarCPF(paciente.identifier)}</i></span></h5>
                                     {idadeCal && <h5>Idade: <span><i>{idadeCal}</i></span> anos</h5>}
