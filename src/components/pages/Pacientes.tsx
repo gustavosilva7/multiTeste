@@ -30,7 +30,7 @@ interface FormData {
 export default function Paciente() {
     const { id } = useParams();
     const [paciente, setPaciente] = useState<Paciente | null>(null);
-    const [showAttendance, setShowAttendance] = useState(false);
+    const [showAttendance] = useState(false);
 
 
     useEffect(() => {
@@ -50,7 +50,7 @@ export default function Paciente() {
             });
     }, [id]);
 
-    const [inforsPaciente, setinforsPaciente] = useState<FormData>({
+    const [, setinforsPaciente] = useState<FormData>({
         patient_id: id,
         temperature: "",
         systolic_pressure: "",
